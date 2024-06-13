@@ -1,33 +1,38 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactForm = () => {
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
   const submitHandler = async (data) => {
     console.log(data);
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await axios.post(
         "http://localhost:8000/api/contact/create-contact",
         data
       );
       if (response.status === 200) {
         toast.success("Response Recorded Successfully");
+        reset()
+        setLoading(false);
+      } else {
+        toast.error("Something Went Wrong");
       }
     } catch (error) {
       console.log(error);
       toast.error("Something Went Wrong");
-    }finally{
-       setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -85,7 +90,7 @@ const ContactForm = () => {
                     {...register("email", {
                       required: "Email is required",
                       pattern: {
-                        value: "/^[^s@]+@[^s@]+.[^s@]+$/",
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                         message: "Invalid Email!",
                       },
                     })}
