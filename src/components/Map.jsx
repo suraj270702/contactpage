@@ -1,6 +1,5 @@
 import React from "react";
 import mapImg from "../assets/Mapsicle Map.png";
-import googleMapImg from "../assets/google-map.svg";
 const Map = () => {
   return (
     <div className="relative h-[638px] lg:h-full">

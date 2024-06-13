@@ -1,7 +1,5 @@
 import React from "react";
-import searchImg from "../assets/Frame 2621.png";
 import userImg from "../assets/Frame 1386.png";
-import hamburgerMenu from "../assets/Frame 1753.png";
 import Logo from "./Logo";
 import MobileLogo from "./MobileLogo";
 
